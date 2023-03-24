@@ -14767,7 +14767,7 @@ GameObject:
   - component: {fileID: 4315194535400250237}
   - component: {fileID: 7070114805505191745}
   m_Layer: 0
-  m_Name: BaaaFx
+  m_Name: BaaaFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
