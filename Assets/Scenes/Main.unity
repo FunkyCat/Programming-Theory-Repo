@@ -33299,6 +33299,7 @@ MonoBehaviour:
   animals:
   - {fileID: 6255697261364196804, guid: 763b40fa483d342478893d2ff881e58d, type: 3}
   - {fileID: 7677939328105960321, guid: 1199469ab11a99d449ad189378f609a5, type: 3}
+  - {fileID: 7302937880393705863, guid: 5eae9a096942e5044902a7dec10f5c79, type: 3}
 --- !u!1 &2077497522
 GameObject:
   m_ObjectHideFlags: 0
