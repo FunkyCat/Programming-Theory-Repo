@@ -6,8 +6,8 @@ using UnityEngine.AI;
 
 public abstract class Animal : MonoBehaviour
 {
-    [SerializeField] protected NavMeshAgent navMeshAgent;
-    [SerializeField] protected Animator animator;
+    protected NavMeshAgent navMeshAgent;
+    protected Animator animator;
     [SerializeField] protected TamingArea _tamingArea = null;
 
     public TamingArea TamingArea { get => _tamingArea; set
@@ -17,6 +17,12 @@ public abstract class Animal : MonoBehaviour
         } }
 
     protected bool isWalking = false;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+    }
 
     // Start is called before the first frame update
     void Start()
