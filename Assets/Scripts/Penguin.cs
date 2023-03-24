@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Penguin : Animal
 {
+    [SerializeField] GameObject InteractFx;
+    [SerializeField] Transform InteractFxHolder;
+
     private Coroutine activeCoroutine = null;
     private bool needReact = false;
 
@@ -87,6 +90,10 @@ public class Penguin : Animal
 
     protected override void OnInteract()
     {
+        if (InteractFx != null && InteractFxHolder != null)
+        {
+            Instantiate(InteractFx, InteractFxHolder, false);
+        }
         needReact = true;
         Stop();
     }

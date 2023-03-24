@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] List<Animal> animals;
     [SerializeField] LayerMask animalLayerMask;
-    [SerializeField] LayerMask uiLayerMask;
+    [SerializeField] GameObject selectionIndicator;
+    [SerializeField] Vector3 selectionIndicatorLocalShift;
 
     public UnityEvent<Animal> OnSelectedAnimalChanged;
 
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Animal SelectedAnimal { get => _selectedAnimal; set
         {
             _selectedAnimal = value;
+            UpdateSelectionIndicator();
             OnSelectedAnimalChanged.Invoke(_selectedAnimal);
         } }
 
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
         {
             CreateNewAnimal();
         }
+        UpdateSelectionIndicator();
     }
 
     private void Update()
@@ -99,6 +102,20 @@ public class GameManager : MonoBehaviour
         if (animal != null)
         {
             animal.OnMouseClick(mouseButton);
+        }
+    }
+
+    void UpdateSelectionIndicator()
+    {
+        if (_selectedAnimal == null && selectionIndicator.transform.parent != null)
+        {
+            selectionIndicator.transform.parent = null;
+            selectionIndicator.SetActive(false);
+        } else if (_selectedAnimal != null && selectionIndicator.transform.parent != _selectedAnimal.gameObject.transform)
+        {
+            selectionIndicator.transform.parent = _selectedAnimal.transform;
+            selectionIndicator.transform.localPosition = selectionIndicatorLocalShift;
+            selectionIndicator.SetActive(true);
         }
     }
 
