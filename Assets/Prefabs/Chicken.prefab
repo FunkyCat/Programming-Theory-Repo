@@ -1372,7 +1372,7 @@ GameObject:
   - component: {fileID: 6255697261364196804}
   m_Layer: 0
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1466,6 +1466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tamingArea: {fileID: 0}
+  _portait: {fileID: 21300000, guid: a44d7e6618020b2489a1a56ccae28478, type: 3}
 --- !u!1 &6966176769491574804
 GameObject:
   m_ObjectHideFlags: 0

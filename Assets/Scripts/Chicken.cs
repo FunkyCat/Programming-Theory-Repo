@@ -7,6 +7,11 @@ public class Chicken : Animal
     private Coroutine activeCoroutine = null;
     private bool needReact = false;
 
+    public override string GetName()
+    {
+        return "Chicken";
+    }
+
     public override string GetStatus()
     {
         return "Cluck-cluck";

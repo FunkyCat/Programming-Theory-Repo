@@ -7,6 +7,10 @@ public class Penguin : Animal
     private Coroutine activeCoroutine = null;
     private bool needReact = false;
 
+    public override string GetName()
+    {
+        return "Penguin";
+    }
     public override string GetStatus()
     {
         return "Honk-honk-honk";

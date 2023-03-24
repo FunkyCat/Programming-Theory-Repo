@@ -7,6 +7,11 @@ public class Sheep : Animal
     private Coroutine activeCoroutine = null;
     private bool needReact = false;
 
+    public override string GetName()
+    {
+        return "Sheep";
+    }
+
     public override string GetStatus()
     {
         return "Baa-a-a-a";

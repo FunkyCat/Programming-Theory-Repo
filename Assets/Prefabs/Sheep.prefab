@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 7677939328105960321}
   m_Layer: 0
   m_Name: Sheep
-  m_TagString: Untagged
+  m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -567,6 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tamingArea: {fileID: 0}
+  _portait: {fileID: 21300000, guid: 0bd2ee4293bb6934f93f75052784b75c, type: 3}
 --- !u!1 &770646964658137243
 GameObject:
   m_ObjectHideFlags: 0

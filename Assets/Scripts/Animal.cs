@@ -8,7 +8,17 @@ public abstract class Animal : MonoBehaviour
 {
     protected NavMeshAgent navMeshAgent;
     protected Animator animator;
+
     [SerializeField] protected TamingArea _tamingArea = null;
+
+    [SerializeField] Sprite _portait;
+    public Sprite Portrait { get  => _portait; }
+
+    protected bool isSelected = false;
+
+    protected bool isWalking = false;
+
+    private GameManager gameManager;
 
     public TamingArea TamingArea { get => _tamingArea; set
         {
@@ -16,12 +26,31 @@ public abstract class Animal : MonoBehaviour
             OnTamingAreaChanged();
         } }
 
-    protected bool isWalking = false;
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        gameManager = FindAnyObjectByType<GameManager>();
+
+        gameManager.OnSelectedAnimalChanged.AddListener(animal =>
+        {
+            if (animal == this)
+            {
+                if (!isSelected)
+                {
+                    isSelected = true;
+                    OnSelected();
+                }
+            }
+            else
+            {
+                if (isSelected)
+                {
+                    isSelected = false;
+                    OnDeselected();
+                }
+            }
+        });
     }
 
     // Start is called before the first frame update
@@ -66,7 +95,6 @@ public abstract class Animal : MonoBehaviour
 
     protected virtual void OnUpdate()
     {
-
     }
 
     protected virtual void OnInteract()
@@ -77,10 +105,23 @@ public abstract class Animal : MonoBehaviour
     {
     }
 
+    protected virtual void OnSelected()
+    {
+    }
+
+    protected virtual void OnDeselected()
+    {
+    }
+
+    public abstract string GetName();
+
     public abstract string GetStatus();
 
-    private void OnMouseUpAsButton()
+    public void OnMouseClick(int mouseButton)
     {
-        OnInteract();
+        if (mouseButton == 1)
+        {
+            OnInteract();
+        }
     }
 }
