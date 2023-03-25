@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] float xRange = 17f;
-    [SerializeField] float zRange = 17f;
+    [SerializeField] float xRangeFrom = -17f;
+    [SerializeField] float xRangeTo = 17f;
+    [SerializeField] float zRangeFrom = -17f;
+    [SerializeField] float zRangeTo = 17f;
     [SerializeField] Vector3 initialPosition;
     [SerializeField] Vector3 initialRotation;
     [SerializeField] float moveSpeed = 10f;
@@ -26,9 +28,9 @@ public class CameraController : MonoBehaviour
 
         transform.Translate(new Vector3(moveHorizontal, 0f, moveVertical));
         transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x, initialPosition.x - xRange, initialPosition.x + xRange),
+            Mathf.Clamp(transform.position.x, xRangeFrom, xRangeTo),
             transform.position.y,
-            Mathf.Clamp(transform.position.z, initialPosition.z - zRange, initialPosition.z + zRange)
+            Mathf.Clamp(transform.position.z, zRangeFrom, zRangeTo)
         );
 
         transform.Rotate(new Vector3(0f, rotate, 0f));
