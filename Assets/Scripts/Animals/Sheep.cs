@@ -9,6 +9,7 @@ public class Sheep : Animal
 
     private Coroutine activeCoroutine = null;
     private bool needReact = false;
+    private bool dontWait = false;
 
     public override string GetName()
     {
@@ -42,8 +43,12 @@ public class Sheep : Animal
 
     IEnumerator TameCycleCoroutine()
     {
-        animator.SetTrigger("Idle");
-        yield return new WaitForSeconds(Random.Range(1f, 3f));
+        if (!dontWait)
+        {
+            animator.SetTrigger("Idle");
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
+        }
+        dontWait = false;
         if (_tamingArea != null)
         {
             GoTo(_tamingArea.GetRandomPoint());
@@ -96,6 +101,12 @@ public class Sheep : Animal
             Instantiate(InteractFx, InteractFxHolder, false);
         }
         needReact = true;
+        Stop();
+    }
+
+    protected override void OnTamingAreaChanged()
+    {
+        dontWait = true;
         Stop();
     }
 }
