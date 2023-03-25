@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] List<TamingArea> tamingAreas = new List<TamingArea>();
-    [SerializeField] TamingArea startArea;
+    [SerializeField] TamingArea _startArea;
+    public TamingArea StartArea { get => _startArea; }
 
     [SerializeField] List<Animal> animals;
     [SerializeField] LayerMask animalLayerMask;
@@ -122,7 +123,7 @@ public class GameManager : MonoBehaviour
     public void CreateNewAnimal()
     {
         var prefab = animals[Random.Range(0, animals.Count)];
-        var point = startArea.GetRandomPoint();
+        var point = _startArea.GetRandomPoint();
         var animal = Instantiate(prefab, point, prefab.transform.rotation);
         animal.TamingArea = tamingAreas[Random.Range(0, tamingAreas.Count)];
     }

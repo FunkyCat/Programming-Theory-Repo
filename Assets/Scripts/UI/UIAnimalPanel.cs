@@ -27,7 +27,7 @@ public class UIAnimalPanel : MonoBehaviour
             {
                 if (gameManager.SelectedAnimal != null)
                 {
-                    gameManager.SelectedAnimal.TamingArea = (value ? selector.tamingArea : null);
+                    gameManager.SelectedAnimal.TamingArea = (value ? selector.tamingArea : gameManager.StartArea);
                 }
                 UpdateSelectors();
             });
