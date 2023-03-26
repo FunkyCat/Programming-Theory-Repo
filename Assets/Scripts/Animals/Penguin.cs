@@ -106,6 +106,7 @@ public class Penguin : Animal
     protected override void OnTamingAreaChanged()
     {
         dontWait = true;
+        StopActiveCoroutine();
         Stop();
     }
 }

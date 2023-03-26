@@ -107,6 +107,7 @@ public class Sheep : Animal
     protected override void OnTamingAreaChanged()
     {
         dontWait = true;
+        StopActiveCoroutine();
         Stop();
     }
 }

@@ -4,35 +4,28 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] float xRangeFrom = -17f;
-    [SerializeField] float xRangeTo = 17f;
-    [SerializeField] float zRangeFrom = -17f;
-    [SerializeField] float zRangeTo = 17f;
-    [SerializeField] Vector3 initialPosition;
-    [SerializeField] Vector3 initialRotation;
-    [SerializeField] float moveSpeed = 10f;
+    public float pitch = 30f;
+    public float yaw = 0f;
+
+    [SerializeField] Transform target;
+    [SerializeField] float distance = 10f;
+    [SerializeField] float minDistance = 5f;
+    [SerializeField] float maxDistance = 30f;
     [SerializeField] float rotateSpeed = 90f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        transform.position = initialPosition;
-        transform.rotation = Quaternion.Euler(initialRotation);
-    }
+    [SerializeField] float zoomSpeed = 10f;
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-        float moveVertical = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-        float rotate = Input.GetAxis("Side") * rotateSpeed * Time.deltaTime;
+        var targetRotation = Quaternion.Euler(pitch, yaw, 0f);
+        var targetPosition = target.position + targetRotation * Vector3.back * distance;
+        transform.position = targetPosition;
+        transform.rotation = targetRotation;
 
-        transform.Translate(new Vector3(moveHorizontal, 0f, moveVertical));
-        transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x, xRangeFrom, xRangeTo),
-            transform.position.y,
-            Mathf.Clamp(transform.position.z, zRangeFrom, zRangeTo)
-        );
+        float rotateInput = Input.GetAxis("CameraRotate");
+        yaw += rotateInput * rotateSpeed * Time.deltaTime;
 
-        transform.Rotate(new Vector3(0f, rotate, 0f));
+        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
+        distance = Mathf.Clamp(distance + wheelInput * zoomSpeed * Time.deltaTime, minDistance, maxDistance);
     }
 }

@@ -9,7 +9,7 @@ public class Chicken : Animal
 
     private Coroutine activeCoroutine = null;
     private bool needReact = false;
-    private bool dontWait = false;
+    [SerializeField] private bool dontWait = false;
 
     public override string GetName()
     {
@@ -107,6 +107,7 @@ public class Chicken : Animal
     protected override void OnTamingAreaChanged()
     {
         dontWait = true;
+        StopActiveCoroutine();
         Stop();
     }
 }

@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject selectionIndicator;
     [SerializeField] Vector3 selectionIndicatorLocalShift;
 
+    [SerializeField] CameraController cameraController;
+    [SerializeField] FreeCameraTargetController freeCameraTarget;
+
     public UnityEvent<Animal> OnSelectedAnimalChanged;
 
     Animal _selectedAnimal = null;
@@ -22,6 +25,7 @@ public class GameManager : MonoBehaviour
         {
             _selectedAnimal = value;
             UpdateSelectionIndicator();
+            UpdateCameraController();
             OnSelectedAnimalChanged.Invoke(_selectedAnimal);
         } }
 
@@ -35,6 +39,7 @@ public class GameManager : MonoBehaviour
             CreateNewAnimal();
         }
         UpdateSelectionIndicator();
+        UpdateCameraController();
     }
 
     private void Update()
@@ -118,6 +123,11 @@ public class GameManager : MonoBehaviour
             selectionIndicator.transform.localPosition = selectionIndicatorLocalShift;
             selectionIndicator.SetActive(true);
         }
+    }
+
+    void UpdateCameraController()
+    {
+        freeCameraTarget.Follow(SelectedAnimal?.transform);
     }
 
     public void CreateNewAnimal()
